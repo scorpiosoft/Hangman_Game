@@ -1,7 +1,7 @@
 // THe Hangman Game Object
-var Hangman
+var Hangman =
 {
-
+  "d_word": document.getElementById("hang_word")
 }
 
 // This function is run whenever the user presses a key.
@@ -25,9 +25,7 @@ document.onkeyup = function(event)
     return false;
   }
 
-  var d_hang_word = document.getElementById("hang_word");
-
-  d_hang_word.textContent = e_key;
+  Hangman.d_word.textContent = e_key;
 
 };
 

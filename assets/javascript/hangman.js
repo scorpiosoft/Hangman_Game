@@ -1,10 +1,33 @@
 // The Hangman Game Object
 var Hangman =
 {
-  "the_words": ["queen", "beatles", "boston", "decemberists", "heartbreakers", "foreigner", "supertramp", "eagles", "aerosmith", "america", "badfinger", "badlees", "bangles", "berlin", "blondie", "cardigans", "commitments", "cracker", "cranberries", "danforths", "elastica", "fastball", "gorillaz", "honeydogs", "hooters", "offspring", "pretenders", "ramones", "smithereens", "soundgarden", "squeeze", "subdudes", "weezer", "yardbirds"],
-  "d_word": document.getElementById("hang_word"),
-  "d_guesses": document.getElementById("prev_guesses"),
-  "a_guesses": [],
+  started:     false,
+  d_message:   document.getElementById("hang_message"),
+  d_word:      document.getElementById("hang_word"),
+  d_guesses:   document.getElementById("hang_guesses"),
+  d_gallows:   document.getElementById("hang_gallows"),
+  the_words:   ["queen", "beatles", "boston", "decemberists", "heartbreakers", "foreigner", "supertramp", "eagles", "aerosmith", "america", "badfinger", "badlees", "bangles", "berlin", "blondie", "cardigans", "commitments", "cracker", "cranberries", "danforths", "elastica", "fastball", "gorillaz", "honeydogs", "hooters", "offspring", "pretenders", "ramones", "smithereens", "soundgarden", "squeeze", "subdudes", "weezer", "yardbirds"],
+  cur_word:    "",
+  cur_gallows: "",
+  a_guesses:   [],
+  start_game: function()
+  {
+    this.started = true;
+    this.d_message.textContent = "Good luck!";
+    this.cur_word = this.the_words[Math.floor(Math.random() * this.the_words.length)];
+    this.set_gallows(0);
+    this.d_gallows.innerHTML = this.cur_gallows;
+  },
+  end_game: function()
+  {
+    this.started = false;
+    this.d_word.textContent = "G A M E . O V E R";
+    this.d_message.textContent = "Press any key to start.";
+  },
+  set_gallows: function(num)
+  {
+    this.cur_gallows = "<img src=assets/images/hangman" + num.toString() + ".png>";
+  },
 }
 
 // Key-Up event function
@@ -16,6 +39,12 @@ document.onkeyup = function(event)
 
   // debug the event
   console.log("event:", event);
+
+  // check for game start / end
+  if (Hangman.started === false)
+  {
+    Hangman.start_game();
+  }
 
   // throw away meta keys
   if (event.key.length > 1)

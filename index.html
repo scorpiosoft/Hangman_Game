@@ -11,14 +11,20 @@
 <body>
 
   <div class="container">
-    <!-- TODO:  "Press any key to get started." -->
+
+    <!-- TODO:  "Press any key to start." / "Game Over!\nPress any key to start." -->
     <!-- TODO:  "Wins" win_count -->
+    <div class="row">
+      <div class="col-md-8 text-center">
+        <h3><span id="hang_message">Press any key to start.</span></h3>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-4">
         <h4>Current Word</h4>
       </div>
       <div class="col-md-4">
-        <span id="hang_word"><strong>_</strong></span>
+        <span id="hang_word"><strong>G A M E . O V E R</strong></span>
       </div>
     </div>
     <div class="row">
@@ -26,7 +32,7 @@
         <h4>Letters Already Guessed</h4>
       </div>
       <div class="col-md-4">
-        <span id="prev_guesses"><strong>_</strong></span>
+        <span id="hang_guesses"><strong></strong></span>
       </div>
     </div>
     <div class="row">
@@ -34,9 +40,10 @@
         <h4>The Gallows</h4>
       </div>
       <div class="col-md-4">
-        <span id="the_gallows"><img src="assets/images/hangman0.png"></span>
+        <span id="hang_gallows"></span>
       </div>
     </div>
+
   </div> <!-- container -->
 
   <script type="text/javascript" src="assets/javascript/hangman.js"></script>

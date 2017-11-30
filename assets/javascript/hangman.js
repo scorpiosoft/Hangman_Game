@@ -8,14 +8,26 @@ var Hangman =
   d_gallows:   document.getElementById("hang_gallows"),
   the_words:   ["queen", "beatles", "boston", "decemberists", "heartbreakers", "foreigner", "supertramp", "eagles", "aerosmith", "america", "badfinger", "badlees", "bangles", "berlin", "blondie", "cardigans", "commitments", "cracker", "cranberries", "danforths", "elastica", "fastball", "gorillaz", "honeydogs", "hooters", "offspring", "pretenders", "ramones", "smithereens", "soundgarden", "squeeze", "subdudes", "weezer", "yardbirds"],
   cur_word:    "",
+  cur_display: "",
   cur_gallows: "",
+  cur_misses:  0,
+  game_over:   6,
   a_guesses:   [],
   start_game: function()
   {
     this.started = true;
     this.d_message.textContent = "Good luck!";
     this.cur_word = this.the_words[Math.floor(Math.random() * this.the_words.length)];
-    this.set_gallows(0);
+    for (var i = 0; i < this.cur_word.length; ++i)
+    {
+      if (i === 0)
+        this.cur_display = "_";
+      else
+        this.cur_display = this.cur_display + " _";
+    }
+    this.d_word.textContent = this.cur_display;
+    this.cur_misses = 0;
+    this.set_gallows();
     this.d_gallows.innerHTML = this.cur_gallows;
   },
   end_game: function()
@@ -24,9 +36,33 @@ var Hangman =
     this.d_word.textContent = "G A M E . O V E R";
     this.d_message.textContent = "Press any key to start.";
   },
-  set_gallows: function(num)
+  set_gallows: function()
   {
-    this.cur_gallows = "<img src=assets/images/hangman" + num.toString() + ".png>";
+    this.cur_gallows = "<img src=assets/images/hangman" + this.cur_misses.toString() + ".png>";
+  },
+  check: function(c)
+  {
+    if(this.cur_word.match(c))  
+    {  
+      console.log("[" + c  + "] is a match");
+      return true;  
+    } else  
+    {  
+      console.log("[" + c  + "] is not a match");
+      return false;  
+    }  
+    x
+  },
+  miss: function()
+  {
+    this.cur_misses++;
+    // sanity check
+    if (this.cur_misses > this.game_over)
+    {
+      alert("You are " + this.cur_misses + " times dead!");
+      this.cur_misses = this.game_over;
+    }
+    this.set_gallows();
   },
 }
 
@@ -40,7 +76,7 @@ document.onkeyup = function(event)
   // debug the event
   console.log("event:", event);
 
-  // check for game start / end
+  // check for game start
   if (Hangman.started === false)
   {
     Hangman.start_game();
@@ -58,18 +94,26 @@ document.onkeyup = function(event)
     return false;
   }
 
-  Hangman.d_word.textContent = e_key;
-  // build the guess_str
-  for (i = 0; i < Hangman.a_guesses.length; ++i)
-  {
-    if (i === 0)
-      guess_str = Hangman.a_guesses[0];
-    else
-      guess_str = guess_str + " " + Hangman.a_guesses[i];
-  }
-  Hangman.d_guesses.textContent = guess_str;
-  Hangman.a_guesses.push(e_key.toUpperCase());
+  // debug display the guess
+  console.log("e_key", e_key);
 
+  // check guess vs word
+  if (Hangman.check(e_key))
+  {
+    // if correct, display the guess in the word
+  } else {
+    // if a miss, add the the guesses and increment the gallows
+    // build the guess_str
+    for (i = 0; i < Hangman.a_guesses.length; ++i)
+    {
+      if (i === 0)
+        guess_str = Hangman.a_guesses[0];
+      else
+        guess_str = guess_str + " " + Hangman.a_guesses[i];
+    }
+    Hangman.d_guesses.textContent = guess_str;
+    Hangman.a_guesses.push(e_key.toUpperCase());
+  }
 };
 
 // utility function which returns true if an alpha char is passed in, otherwise false

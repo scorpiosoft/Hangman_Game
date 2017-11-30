@@ -1,11 +1,6 @@
 *
 {
-  color: wheat;
-}
-
-body
-{
-  min-height: 720px;
+  color: #917c12;
 }
 
 img
@@ -13,16 +8,21 @@ img
   width: 100%;
 }
 
-.height
+.hang_height
 {
-  min-height: 720px;
+  min-height: 500px;
 }
 
-.background
+.hang_back
 {
   background-image: url("../images/guitar-2925274_960_720.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
+}
+
+.inst_back
+{
+  background-color: lightgray;
 }

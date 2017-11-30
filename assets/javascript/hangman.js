@@ -10,6 +10,7 @@ var Hangman =
   cur_word:    "",
   cur_display: "",
   cur_gallows: "",
+  cur_correct: 0,
   cur_misses:  0,
   game_over:   6,
   a_guesses:   [],
@@ -26,14 +27,15 @@ var Hangman =
         this.cur_display = this.cur_display + " _";
     }
     this.d_word.textContent = this.cur_display;
+    this.cur_correct = 0;
     this.cur_misses = 0;
     this.set_gallows();
     this.d_gallows.innerHTML = this.cur_gallows;
   },
-  end_game: function()
+  end_game: function(msg)
   {
     this.started = false;
-    this.d_word.textContent = "G A M E . O V E R";
+    this.d_word.textContent = msg;
     this.d_message.textContent = "Press any key to start.";
   },
   set_gallows: function()
@@ -109,6 +111,7 @@ document.onkeyup = function(event)
       // need to rebuild the entire display string
       if (Hangman.cur_word.charAt(i) === e_key)
       {
+        Hangman.cur_correct++; // increment correct count
         console.log("replacing position " + i, "idx", idx);
         // Hangman.cur_display[((i+1)*2)-2] = e_key; // This would work in a real language!!!  Instead I have to add all sorts of extra logic to rebuild the string one piece at a time!!!
         if (i === 0)
@@ -142,6 +145,11 @@ document.onkeyup = function(event)
   }
 
   // check for win or game over
+  if (Hangman.cur_correct === Hangman.cur_word.length)
+    Hangman.end_game("Y O U . W I N");
+  else
+  if (Hangman.cur_misses === Hangman.game_over)
+    Hangman.end_game("G A M E . O V E R");
 };
 
 // utility function which returns true if an alpha char is passed in, otherwise false

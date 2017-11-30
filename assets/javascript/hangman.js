@@ -1,6 +1,7 @@
 // The Hangman Game Object
 var Hangman =
 {
+  "the_words": ["queen", "beatles", "boston", "decemberists", "heartbreakers", "foreigner", "supertramp", "eagles", "aerosmith", "america", "badfinger", "badlees", "bangles", "berlin", "blondie", "cardigans", "commitments", "cracker", "cranberries", "danforths", "elastica", "fastball", "gorillaz", "honeydogs", "hooters", "offspring", "pretenders", "ramones", "smithereens", "soundgarden", "squeeze", "subdudes", "weezer", "yardbirds"],
   "d_word": document.getElementById("hang_word"),
   "d_guesses": document.getElementById("prev_guesses"),
   "a_guesses": [],

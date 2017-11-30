@@ -31,6 +31,8 @@ var Hangman =
     this.cur_misses = 0;
     this.set_gallows();
     this.d_gallows.innerHTML = this.cur_gallows;
+    this.a_guesses = [];
+    this.d_guesses.textContent = "";
   },
   end_game: function(msg)
   {
@@ -84,6 +86,7 @@ document.onkeyup = function(event)
   if (Hangman.started === false)
   {
     Hangman.start_game();
+    return false;
   }
 
   // throw away meta keys
@@ -128,7 +131,11 @@ document.onkeyup = function(event)
     Hangman.cur_display = display;
     Hangman.d_word.textContent = Hangman.cur_display;
   } else {
-    // if a miss, add the guess and increment the gallows
+    // if a new miss, add the guess and increment the gallows
+    guess_str = Hangman.a_guesses.toString();
+    if (guess_str.includes(e_key.toUpperCase()))
+      return false; // not a new miss
+
     Hangman.a_guesses.push(e_key.toUpperCase());
     // build the guess_str
     for (i = 0; i < Hangman.a_guesses.length; ++i)

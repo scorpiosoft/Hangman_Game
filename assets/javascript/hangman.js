@@ -1,14 +1,17 @@
-// THe Hangman Game Object
+// The Hangman Game Object
 var Hangman =
 {
-  "d_word": document.getElementById("hang_word")
+  "d_word": document.getElementById("hang_word"),
+  "d_guesses": document.getElementById("prev_guesses"),
+  "a_guesses": [],
 }
 
-// This function is run whenever the user presses a key.
+// Key-Up event function
 document.onkeyup = function(event)
 {
-  // save the event key for convenience
-  var e_key;
+  var i;
+  var e_key; // lower case event key
+  var guess_str; // string for the guesses
 
   // debug the event
   console.log("event:", event);
@@ -26,6 +29,16 @@ document.onkeyup = function(event)
   }
 
   Hangman.d_word.textContent = e_key;
+  // build the guess_str
+  for (i = 0; i < Hangman.a_guesses.length; ++i)
+  {
+    if (i === 0)
+      guess_str = Hangman.a_guesses[0];
+    else
+      guess_str = guess_str + " " + Hangman.a_guesses[i];
+  }
+  Hangman.d_guesses.textContent = guess_str;
+  Hangman.a_guesses.push(e_key.toUpperCase());
 
 };
 

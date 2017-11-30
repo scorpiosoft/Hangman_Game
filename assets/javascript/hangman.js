@@ -2,6 +2,7 @@
 var Hangman =
 {
   started:     false,
+  d_wins:      document.getElementById("hang_wins"),
   d_message:   document.getElementById("hang_message"),
   d_word:      document.getElementById("hang_word"),
   d_guesses:   document.getElementById("hang_guesses"),
@@ -10,6 +11,7 @@ var Hangman =
   cur_word:    "",
   cur_display: "",
   cur_gallows: "",
+  wins:        0,
   cur_correct: 0,
   cur_misses:  0,
   game_over:   6,
@@ -130,6 +132,7 @@ document.onkeyup = function(event)
     }
     Hangman.cur_display = display;
     Hangman.d_word.textContent = Hangman.cur_display;
+    console.log("cur_correct", Hangman.cur_correct);
   } else {
     // if a new miss, add the guess and increment the gallows
     guess_str = Hangman.a_guesses.toString();
@@ -152,10 +155,12 @@ document.onkeyup = function(event)
   }
 
   // check for win or game over
-  if (Hangman.cur_correct === Hangman.cur_word.length)
+  if (Hangman.cur_correct >= Hangman.cur_word.length)
+  {
     Hangman.end_game("Y O U . W I N");
-  else
-  if (Hangman.cur_misses === Hangman.game_over)
+    Hangman.d_wins.textContent = ++(Hangman.wins) + " Wins";
+  } else
+  if (Hangman.cur_misses >= Hangman.game_over)
     Hangman.end_game("G A M E . O V E R");
 };
 

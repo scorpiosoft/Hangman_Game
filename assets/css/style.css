@@ -1,0 +1,28 @@
+*
+{
+  color: wheat;
+}
+
+body
+{
+  min-height: 720px;
+}
+
+img
+{
+  width: 100%;
+}
+
+.height
+{
+  min-height: 720px;
+}
+
+.background
+{
+  background-image: url("../images/guitar-2925274_960_720.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}

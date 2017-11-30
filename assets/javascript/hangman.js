@@ -42,7 +42,7 @@ var Hangman =
   },
   check: function(c)
   {
-    if(this.cur_word.match(c))  
+    if(this.cur_word.includes(c))
     {  
       console.log("[" + c  + "] is a match");
       return true;  
@@ -70,9 +70,10 @@ var Hangman =
 // Key-Up event function
 document.onkeyup = function(event)
 {
-  var i;
+  var i, idx;
   var e_key; // lower case event key
   var guess_str; // string for the guesses
+  var display; // string for the display
 
   // debug the event
   console.log("event:", event);
@@ -102,6 +103,27 @@ document.onkeyup = function(event)
   if (Hangman.check(e_key))
   {
     // if correct, display the guess in the word
+    for (i = 0; i < Hangman.cur_word.length; ++i)
+    {
+      idx = ((i+1)*2)-2;
+      // need to rebuild the entire display string
+      if (Hangman.cur_word.charAt(i) === e_key)
+      {
+        console.log("replacing position " + i, "idx", idx);
+        // Hangman.cur_display[((i+1)*2)-2] = e_key; // This would work in a real language!!!  Instead I have to add all sorts of extra logic to rebuild the string one piece at a time!!!
+        if (i === 0)
+          display = e_key;
+        else
+          display += " " + e_key;
+      } else {
+        if (i === 0)
+          display = Hangman.cur_display.charAt(0);
+        else
+          display += " " + Hangman.cur_display.charAt(idx);
+      }
+    }
+    Hangman.cur_display = display;
+    Hangman.d_word.textContent = Hangman.cur_display;
   } else {
     // if a miss, add the guess and increment the gallows
     Hangman.a_guesses.push(e_key.toUpperCase());
@@ -118,6 +140,8 @@ document.onkeyup = function(event)
     // display the new gallows
     Hangman.miss();
   }
+
+  // check for win or game over
 };
 
 // utility function which returns true if an alpha char is passed in, otherwise false

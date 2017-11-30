@@ -63,6 +63,7 @@ var Hangman =
       this.cur_misses = this.game_over;
     }
     this.set_gallows();
+    this.d_gallows.innerHTML = this.cur_gallows;
   },
 }
 
@@ -102,7 +103,8 @@ document.onkeyup = function(event)
   {
     // if correct, display the guess in the word
   } else {
-    // if a miss, add the the guesses and increment the gallows
+    // if a miss, add the guess and increment the gallows
+    Hangman.a_guesses.push(e_key.toUpperCase());
     // build the guess_str
     for (i = 0; i < Hangman.a_guesses.length; ++i)
     {
@@ -111,8 +113,10 @@ document.onkeyup = function(event)
       else
         guess_str = guess_str + " " + Hangman.a_guesses[i];
     }
+    // display the guesses
     Hangman.d_guesses.textContent = guess_str;
-    Hangman.a_guesses.push(e_key.toUpperCase());
+    // display the new gallows
+    Hangman.miss();
   }
 };
 

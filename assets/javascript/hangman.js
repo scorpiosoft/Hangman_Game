@@ -1,3 +1,9 @@
+// DOM elements for playing sounds
+var d_win = document.getElementById("win");
+var d_hit = document.getElementById("hit");
+var d_miss = document.getElementById("miss");
+var d_game_over = document.getElementById("game_over");
+
 // The Hangman Game Object
 var Hangman =
 {
@@ -71,6 +77,7 @@ var Hangman =
     }
     this.set_gallows();
     this.d_gallows.innerHTML = this.cur_gallows;
+    play_now(d_miss);
   },
 }
 
@@ -134,6 +141,7 @@ document.onkeyup = function(event)
     Hangman.cur_display = scratch;
     Hangman.d_word.textContent = Hangman.cur_display;
     console.log("cur_correct", Hangman.cur_correct);
+    play_now(d_hit);
   } else {
     // if a new miss, add the guess and increment the gallows
     scratch = Hangman.a_misses.toString();
@@ -149,9 +157,9 @@ document.onkeyup = function(event)
       else
         scratch = scratch + " " + Hangman.a_misses[i];
     }
-    // scratch the guesses
+    // display the guesses
     Hangman.d_guesses.textContent = scratch;
-    // scratch the new gallows
+    // display the new gallows
     Hangman.miss();
   }
 
@@ -160,9 +168,13 @@ document.onkeyup = function(event)
   {
     Hangman.end_game("Y O U . W I N");
     Hangman.d_wins.textContent = ++(Hangman.wins) + " Wins";
+    play_now(d_win);
   } else
   if (Hangman.cur_misses >= Hangman.game_over)
+  {
     Hangman.end_game("G A M E . O V E R");
+    play_now(d_game_over);
+  }
 };
 
 // utility function which returns true if an alpha char is passed in, otherwise false
@@ -179,4 +191,14 @@ function isalpha(str)
     console.log("[" + str  + "] is not a letter");
     return false;  
   }  
-};  
+};
+
+// utility function for playing audio
+function play_now(id)
+{
+  d_hit.pause();
+  d_hit.currentTime = 0;
+  d_miss.pause();
+  d_miss.currentTime = 0;
+  id.play();
+};

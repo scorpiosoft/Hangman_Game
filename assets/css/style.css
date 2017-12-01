@@ -1,6 +1,13 @@
 *
 {
   color: #917c12;
+  text-shadow: 1px 1px #ffffff;
+  font-weight: 700;
+}
+
+p
+{
+  text-shadow: none;
 }
 
 img

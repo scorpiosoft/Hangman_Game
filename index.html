@@ -6,28 +6,29 @@
   <title>Hangman</title>
   <!-- bootstrap stylesheet -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Arimo:400,700|Kalam:400,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
   <div class="container-fluid hang_back hang_height">
 
     <!-- TODO:  "Wins" win_count -->
-    <div class="row">
+    <div class="row pt-5">
       <div class="col text-center">
-        <h3><span id="hang_wins">0 Wins</span></h3>
+        <h2><span id="hang_wins">0 Wins</span></h2>
       </div>
     </div>
     <div class="row">
       <div class="col text-center">
-        <h3><span id="hang_message">Press any key to start.</span></h3>
+        <h2><span id="hang_message">Press any key to start.</span></h2>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <h4>Current Word</h4>
       </div>
-      <div class="col-md-4">
-        <span id="hang_word">G A M E . O V E R</span>
+      <div class="col-md-8">
+        <h3><span id="hang_word" class="mono">G A M E . O V E R</span></h3>
       </div>
     </div>
     <div class="row">
@@ -35,12 +36,12 @@
         <h4>Incorrect Guesses</h4>
       </div>
       <div class="col-md-4">
-        <span id="hang_guesses"></span>
+        <h3><span id="hang_guesses" class="mono"></span></h3>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
-        <h4>The Gallows</h4>
+        <h3>The Gallows</h3>
       </div>
       <div class="col-md-4">
         <span id="hang_gallows"></span>
@@ -51,7 +52,7 @@
   <div class="container-fluid inst_back">
     <div class="row">
       <div class="col">
-        <p>Instructions:  Like classic pen and paper Hangman, the player will lose after the 6th incorrect guess.  The theme for this version of Hangman is band names.  There are only one word band names, except for bands beginning with 'The', the 'The' is dropped; e.g. 'The Beatles' would be just 'Beatles'.</p>
+        <p class="mt-3">Instructions:  Like classic pen and paper Hangman, the player will lose after the 6th incorrect guess.  The theme for this version of Hangman is band names.  There are only one word band names, except for bands beginning with 'The', the 'The' is dropped; e.g. 'The Beatles' would be just 'Beatles'.</p>
       </div>
     </div>
 

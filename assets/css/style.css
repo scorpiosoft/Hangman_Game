@@ -3,6 +3,7 @@
   color: #917c12;
   text-shadow: 1px 1px #ffffff;
   font-weight: 700;
+  font-family: 'Kalam', cursive;
 }
 
 p
@@ -32,4 +33,9 @@ img
 .inst_back
 {
   background-color: lightgray;
+}
+
+.mono
+{
+  font-family: 'Anonymous Pro', monospace;
 }

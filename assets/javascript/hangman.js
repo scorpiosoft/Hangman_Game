@@ -56,8 +56,7 @@ var Hangman =
     {  
       console.log("[" + c  + "] is not a match");
       return false;  
-    }  
-    x
+    }
   },
   miss: function()
   {
@@ -77,7 +76,7 @@ var Hangman =
 document.onkeyup = function(event)
 {
   var i, idx;
-  var e_key; // lower case event key
+  var e_key = String.fromCharCode(event.keyCode).toLowerCase();
   var guess_str; // string for the guesses
   var display; // string for the display
 
@@ -91,15 +90,9 @@ document.onkeyup = function(event)
     return false;
   }
 
-  // throw away meta keys
-  if (event.key.length > 1)
-    return false;
-
-  // throw away non-alpha keys, then lowercase those that remain
-  if (isalpha(event.key))
+  // throw away non-alpha keys
+  if (!isalpha(e_key))
   {
-    e_key = event.key.toLowerCase();
-  } else {
     return false;
   }
 

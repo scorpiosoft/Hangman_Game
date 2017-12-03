@@ -1,3 +1,5 @@
+// DOM elements for the body
+var d_Hangman = document.getElementById("HangmanGame");
 // DOM elements for playing sounds
 var d_win = document.getElementById("win");
 var d_hit = document.getElementById("hit");
@@ -11,22 +13,30 @@ d_game_over.volume = 0.2;
 // The Hangman Game Object
 var Hangman =
 {
+  // Is the game started? true/false
   started:     false,
+  // DOM elements to update
   d_wins:      document.getElementById("hang_wins"),
   d_message:   document.getElementById("hang_message"),
   d_word:      document.getElementById("hang_word"),
   d_guesses:   document.getElementById("hang_guesses"),
   d_gallows:   document.getElementById("hang_gallows"),
+  // array of words for the game
   the_words:   ["queen", "beatles", "boston", "decemberists", "heartbreakers", "foreigner", "supertramp", "eagles", "aerosmith", "america", "badfinger", "badlees", "bangles", "berlin", "blondie", "cardigans", "commitments", "cracker", "cranberries", "danforths", "elastica", "fastball", "gorillaz", "honeydogs", "hooters", "offspring", "pretenders", "ramones", "smithereens", "soundgarden", "squeeze", "subdudes", "weezer", "yardbirds"],
+  // current values in the game
   cur_word:    "",
   cur_display: "",
   cur_gallows: "",
-  wins:        0,
   cur_correct: 0,
   cur_misses:  0,
+  // win count for session
+  wins:        0,
+  // number of misses equalling GAME OVER
   game_over:   6,
+  // arrays to store hits and misses
   a_hits:      [],
   a_misses:    [],
+  // method to start a new game
   start_game: function()
   {
     this.started = true;
@@ -47,17 +57,27 @@ var Hangman =
     this.a_hits = [];
     this.a_misses = [];
     this.d_guesses.textContent = "";
+
+    // temporarily set the height to avoid dynamic flashing
+    var h = d_Hangman.clientHeight;
+    d_Hangman.style.height = h + "px";
   },
+  // method to end the current game
   end_game: function(msg)
   {
     this.started = false;
     this.d_word.textContent = msg;
     this.d_message.textContent = "Press any key to start.";
+
+    // undo temporary fixed height
+    d_Hangman.style.height = "initial";
   },
+  // method to set the gallows image
   set_gallows: function()
   {
     this.cur_gallows = "<img src=assets/images/hangman" + this.cur_misses.toString() + ".png>";
   },
+  // method to check the current guess vs the current word
   check: function(c)
   {
     if(this.cur_word.includes(c))
@@ -70,6 +90,7 @@ var Hangman =
       return false;  
     }
   },
+  // method to do the actions when the player misses
   miss: function()
   {
     this.cur_misses++;
@@ -90,8 +111,7 @@ document.onkeyup = function(event)
 {
   var i, idx;
   var e_key = String.fromCharCode(event.keyCode).toLowerCase();
-  var scratch;
-  var scratch; // string for the scratch
+  var scratch; // scratch string
 
   // debug the event
   console.log("event:", event);

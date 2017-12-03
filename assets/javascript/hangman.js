@@ -1,13 +1,3 @@
-// DOM elements for playing sounds
-var d_win = document.getElementById("win");
-var d_hit = document.getElementById("hit");
-var d_miss = document.getElementById("miss");
-var d_game_over = document.getElementById("game_over");
-d_win.volume = 0.2;
-d_hit.volume = 0.2;
-d_miss.volume = 0.2;
-d_game_over.volume = 0.2;
-
 // The Hangman Game Object
 var Hangman =
 {
@@ -19,6 +9,11 @@ var Hangman =
   d_word:      document.getElementById("hang_word"),
   d_guesses:   document.getElementById("hang_guesses"),
   d_gallows:   document.getElementById("hang_gallows"),
+  // DOM elements for playing sounds
+  d_win:       document.getElementById("win"),
+  d_hit:       document.getElementById("hit"),
+  d_miss:      document.getElementById("miss"),
+  d_game_over: document.getElementById("game_over"),
   // array of words for the game
   the_words:   ["queen", "beatles", "boston", "decemberists", "heartbreakers", "foreigner", "supertramp", "eagles", "aerosmith", "america", "badfinger", "badlees", "bangles", "berlin", "blondie", "cardigans", "commitments", "cracker", "cranberries", "danforths", "elastica", "fastball", "gorillaz", "honeydogs", "hooters", "offspring", "pretenders", "ramones", "smithereens", "soundgarden", "squeeze", "subdudes", "weezer", "yardbirds"],
   // current values in the game
@@ -93,7 +88,18 @@ var Hangman =
     }
     this.set_gallows();
     this.d_gallows.innerHTML = this.cur_gallows;
-    play_now(d_miss);
+    this.play_sound(this.d_miss);
+  },
+  // method for playing audio
+  play_sound: function(id)
+  {
+    // in order for the sounds to all play *now*, the sound currently playing nneds to be paused and reset
+    // otherwise the old sound finishes and the new sound gets ignored
+    this.d_hit.pause();
+    this.d_hit.currentTime = 0;
+    this.d_miss.pause();
+    this.d_miss.currentTime = 0;
+    id.play();
   },
 }
 
@@ -156,7 +162,7 @@ document.onkeyup = function(event)
     Hangman.cur_display = scratch;
     Hangman.d_word.textContent = Hangman.cur_display;
     console.log("cur_correct", Hangman.cur_correct);
-    play_now(d_hit);
+    Hangman.play_sound(Hangman.d_hit);
   } else {
     // if a new miss, add the guess and increment the gallows
     scratch = Hangman.a_misses.toString();
@@ -183,12 +189,12 @@ document.onkeyup = function(event)
   {
     Hangman.end_game("Y O U . W I N");
     Hangman.d_wins.textContent = ++(Hangman.wins) + " Wins";
-    play_now(d_win);
+    Hangman.play_sound(Hangman.d_win);
   } else
   if (Hangman.cur_misses >= Hangman.game_over)
   {
     Hangman.end_game("G A M E . O V E R");
-    play_now(d_game_over);
+    Hangman.play_sound(Hangman.d_game_over);
   }
 };
 
@@ -208,12 +214,8 @@ function isalpha(str)
   }  
 };
 
-// utility function for playing audio
-function play_now(id)
-{
-  d_hit.pause();
-  d_hit.currentTime = 0;
-  d_miss.pause();
-  d_miss.currentTime = 0;
-  id.play();
-};
+// lower the volume
+Hangman.d_win.volume = 0.2;
+Hangman.d_hit.volume = 0.2;
+Hangman.d_miss.volume = 0.2;
+Hangman.d_game_over.volume = 0.2;

@@ -141,7 +141,7 @@ document.onkeyup = function(event)
       {
         Hangman.cur_correct++; // increment correct count
         console.log("replacing position " + i, "idx", idx);
-        // Hangman.cur_display[((i+1)*2)-2] = e_key; // This would work in a real language!!!  Instead I have to add all sorts of extra logic to rebuild the string one piece at a time!!!
+        // Hangman.cur_display[((i+1)*2)-2] = e_key; // This would work in other languages.  Instead I have to add all sorts of extra logic to rebuild the string one piece at a time!!!
         if (i === 0)
           scratch = e_key;
         else

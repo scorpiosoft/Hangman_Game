@@ -1,5 +1,3 @@
-// DOM elements for the body
-var d_Hangman = document.getElementById("HangmanGame");
 // DOM elements for playing sounds
 var d_win = document.getElementById("win");
 var d_hit = document.getElementById("hit");
@@ -57,10 +55,6 @@ var Hangman =
     this.a_hits = [];
     this.a_misses = [];
     this.d_guesses.textContent = "";
-
-    // temporarily set the height to avoid dynamic flashing
-    var h = d_Hangman.clientHeight;
-    d_Hangman.style.height = h + "px";
   },
   // method to end the current game
   end_game: function(msg)
@@ -68,9 +62,6 @@ var Hangman =
     this.started = false;
     this.d_word.textContent = msg;
     this.d_message.textContent = "Press any key to start.";
-
-    // undo temporary fixed height
-    d_Hangman.style.height = "initial";
   },
   // method to set the gallows image
   set_gallows: function()

@@ -3,6 +3,10 @@ var d_win = document.getElementById("win");
 var d_hit = document.getElementById("hit");
 var d_miss = document.getElementById("miss");
 var d_game_over = document.getElementById("game_over");
+d_win.volume = 0.2;
+d_hit.volume = 0.2;
+d_miss.volume = 0.2;
+d_game_over.volume = 0.2;
 
 // The Hangman Game Object
 var Hangman =

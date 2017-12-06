@@ -6,8 +6,12 @@
   <title>Hangman</title>
   <!-- bootstrap stylesheet -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <!-- google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Monoton|Nothing+You+Could+Do" rel="stylesheet">
+  <!-- local stylesheet -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </head>
 <body id="HangmanGame">
   <div class="container-fluid hang_back hang_height">
@@ -48,7 +52,7 @@
         <h3>The Gallows</h3>
       </div>
       <div class="col-md-4 gallows_back">
-        <span id="hang_gallows"><img src=assets/images/hangman0.png></span>
+        <img id="hang_gallows" src=assets/images/hangman0.png>
       </div>
     </div>
 
@@ -63,7 +67,7 @@
     </div>
     <div class="row pb-3">
       <div class="col">
-        <a href="index_jq.html">JavaScript with jQuery version</a>
+        <a href="index.html">JavaScript only version</a>
       </div>
     </div>
 
@@ -74,7 +78,7 @@
   <audio id="miss" src="assets/audio/Smashing-Yuri_Santana-1233262689.mp3" type="audio/mpeg" autostart="false"></audio>
   <audio id="game_over" src="assets/audio/Sad_Trombone-Joe_Lamb-665429450.mp3" type="audio/mpeg" autostart="false"></audio>
 
-  <script type="text/javascript" src="assets/javascript/hangman.js"></script>
+  <script type="text/javascript" src="assets/javascript/hangman_jq.js"></script>
 
 </body>
 </html>
